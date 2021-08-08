@@ -240,7 +240,7 @@ window.addEventListener('DOMContentLoaded', () => {
         const forms = document.querySelectorAll ('form');
 
         const message = {
-            loading: 'Loading, prease wait',
+            loading: 'img/form/spinner.svg',
             success: 'Okay, we will contact you:)',
             failure: 'пиздарики'
         };
@@ -253,10 +253,14 @@ window.addEventListener('DOMContentLoaded', () => {
             form.addEventListener('submit', (e) => {
                 e.preventDefault();
 
-                const statusMessage = document.createElement('div');
-                statusMessage.classList.add('status');
-                statusMessage.textContent = message.loading;
-                form.append(statusMessage);
+                const statusMessage = document.createElement('img');
+                statusMessage.src = message.loading;
+                statusMessage.style.cssText = `
+                    display: block;
+                    margin: 0 auto;
+                `;
+                form.insertAdjacentElement('afterend', statusMessage);
+
 
                 const request = new XMLHttpRequest();
                 request.open('POST', 'server.php');
